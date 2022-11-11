@@ -1,0 +1,1 @@
+board = [[randint(01), for j in range(MAX_COL)]for i in range(MAX_ROWS)]
