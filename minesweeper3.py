@@ -1,7 +1,7 @@
-from cProfile import label
-from sre_constants import JUMP
-from tkinter import CENTER
-from turtle import color, goto
+#from cProfile import label
+#from sre_constants import JUMP
+#from tkinter import CENTER
+#from turtle import color, goto
 import PySimpleGUI as sg
 from random import randint as rng
 import time 
