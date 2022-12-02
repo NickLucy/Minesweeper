@@ -3,7 +3,7 @@
 import PySimpleGUI as sg
 import random
 import time
-from PIL import Image
+from PIL import Image, ImageTk
 
 #Time Function
 
@@ -220,9 +220,15 @@ def Order66():
                 
                 if events == y + '-right':
                     #im = Image.open("flag.png")
-                    if not win2[y].ButtonText == sg.Image('flag.png', size=(300,300)):
-                        
-                        win2[y].update(sg.Image('flag.png', size=(10,10)), button_color=('red', 'light green'))
+                    size = (20, 20)
+                    im = Image.open("flag.png")
+                    im = im.resize(size, resample=Image.Resampling.BICUBIC)
+                    image = ImageTk.PhotoImage(image=im)
+
+                    # update image in sg.Image
+                    #window['-IMAGE-'].update(data=image)
+                    if not win2[y].ButtonText == '🚩':
+                         win2[y].update('🚩', button_color=('red', 'light green'))
                     else:
                         win2[y].update('?', button_color=('black','white'))
 

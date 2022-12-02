@@ -17,8 +17,8 @@ def Order66():
 
     # Criação da Primeira Janela
 
-    sg.theme('DarkGreen')
-    l1 = [[sg.Text('Campo Minado', font=('Times New Roman', 14, 'bold'), text_color='darkBlue')],
+    sg.theme('dark green 1')
+    l1 = [[sg.Text('Campo Minado', font=('Times New Roman', 14, 'bold'), text_color='gold')],
     [sg.Button('Iniciar')]]
     win1 = sg.Window('Campo Minado', l1)
 
@@ -93,15 +93,15 @@ def Order66():
 
     for i in range(10):
         for y in range(10):
-            l2[i].append(sg.Button('?', size=(5, 3), pad = (2 , 2), key = (str(i) + str(y))))
+            l2[i].append(sg.Button('?', button_color = 'yellow green', size=(5, 3), pad = (2 , 2), key = (str(i) + str(y))))
     
     l2.append([sg.Text('', key='clock', font=('Times New Roman', 14), text_color='black')])
 
-    l1_1 = [[sg.Text('Difficulty:', font=('Times New Roman', 14), text_color='black')],
+    l1_1 = [[sg.Text('Difficulty:', font=('Times New Roman', 14, 'bold'), text_color='gold')],
     [sg.Combo(values=['Easy', 'Medium', 'Hard'], default_value='Easy', key='dif')],
     [sg.Button('Iniciar Jogo')]]
 
-    win1_1 = sg.Window('Campo Minado', l1_1)
+    win1_1 = sg.Window('minesweeper v???', l1_1)
 
 
     # Execução da janela da dificuldade
@@ -150,7 +150,7 @@ def Order66():
 
         print(minas)
 
-        win2 = sg.Window('Campo Minado', l2, finalize = True)
+        win2 = sg.Window('minesweeper v???', l2, finalize = True)
 
         # Inicialização da função do botão direito
 
@@ -222,7 +222,7 @@ def Order66():
                     if not win2[y].ButtonText == '🚩':
                         win2[y].update('🚩', button_color=('red', 'light green'))
                     else:
-                        win2[y].update('?', button_color=('black','white'))
+                        win2[y].update('?', button_color=('black', 'yellow green'))
 
 
             if stop:
@@ -239,7 +239,7 @@ def Order66():
 
     # Criação da janela do vencedor
 
-    l4 = [[sg.Text('Você ganhou! Meus parabéns')], [sg.Button('Reiniciar')]]
+    l4 = [[sg.Text('You Won!')], [sg.Button('Reiniciar')]]
     win4 = sg.Window('Campo Minado', l4)
 
     # Execução da janela do vencedor
