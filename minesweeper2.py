@@ -18,7 +18,7 @@ def Order66():
     # Window 1
 
     sg.theme('dark green 1')
-    l1 = [[sg.Text('Minesweeper', font=('Franklin Gothic Book', 14, 'bold'), text_color='gold')], [sg.Button('Iniciar', font=('Franklin Gothic Book', 14))]]
+    l1 = [[sg.Text('Minesweeper', font=('Franklin Gothic Book', 14, 'bold'), text_color='gold')], [sg.Button('Start', font=('Franklin Gothic Book', 14))]]
     win1 = sg.Window('Minesweeper', l1)
 
     
@@ -73,7 +73,7 @@ def Order66():
 
         if events == sg.WIN_CLOSED:
             break
-        if events == 'Iniciar':
+        if events == 'Start':
             condition1 = True
             break
 
@@ -216,12 +216,12 @@ def Order66():
                          win2[y].update(image_data=flag)
 
                     else:
-                        win2[y].update('?', button_color=('black','white'))
+                        win2[y].update('?', button_color=('white','yellow green'))
 
-                   # if not win2[y].ButtonText == '🚩':
-                    #    win2[y].update('🚩', button_color=('red', 'white'))
+                    #if win2[y].ButtonText != '🚩':
+                    #    win2[y].update('🚩', button_color=('red', 'yellow green'))
                     #else:
-                     #   win2[y].update('?', button_color=('black','white'))
+                    #   win2[y].update('?', button_color=('white','yellow green'))
 
 
             if stop:

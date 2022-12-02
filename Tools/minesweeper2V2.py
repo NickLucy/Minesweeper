@@ -1,31 +1,27 @@
-# Libraries
+# Library stuff
 
 import PySimpleGUI as sg
 import random
 import time
+from PIL import Image
 
-#Time function
+# Time Stuff
 
 def time_int():
     return int(round(time.time() * 100))
 
 
-# Criação da função de execução
+# Execute order 66
 
-def executeGame():
+def Order66():
 
-    # Criação da Primeira Janela
+    # Window 1
 
-    sg.theme('LightBlue')
-    l1 = [[sg.Text('Campo Minado', font=('Times New Roman', 14, 'bold'), text_color='darkBlue')],
-    [sg.Button('Iniciar')]]
-    win1 = sg.Window('Campo Minado', l1)
+    sg.theme('dark green 1')
+    l1 = [[sg.Text('Minesweeper', font=('Franklin Gothic Book', 14, 'bold'), text_color='gold')], [sg.Button('Start', font=('Franklin Gothic Book', 14))]]
+    win1 = sg.Window('Minesweeper', l1)
 
-    l1_1 = [[sg.Text('Difficulty:', font=('Times New Roman', 14), text_color='black')],
-    [sg.Combo(values=['Fácil', 'Médio', 'Difícil'], default_value='Fácil', key='difi')],
-    [sg.Button('Iniciar Jogo')]]
-
-    # Variável de transição
+    
 
     condition1 = False
     condition2 = False
@@ -33,60 +29,57 @@ def executeGame():
     winner = False
     restart = False
 
-    # Variáveis do jogo
+   
 
     holes = 0
     mines = 0
     coo = []
 
-    # Criação da função de radar de bombas
+    # Bomb finder
 
     def radar():
         coo2 = coo
-        contador = 0
+        counter = 0
         coo2[0] -= 1
         coo[1] -= 1
         if coo[0] >= 0 and coo[1] >= 0 and coo[0] < 10 and coo[1] < 10:
             if minas[coo2[0]][coo2[1]] == 1:
-                contador += 1
+                counter += 1
         for i in range(2):
             coo2[1] += 1
             if coo[0] >= 0 and coo[1] >= 0 and coo[0] < 10 and coo[1] < 10:
                 if minas[coo2[0]][coo2[1]] == 1:
-                    contador += 1
+                    counter += 1
         for i in range(2):
             coo2[0] += 1
             if coo[0] >= 0 and coo[1] >= 0 and coo[0] < 10 and coo[1] < 10:
                 if minas[coo2[0]][coo2[1]] == 1:
-                    contador += 1
+                    counter += 1
         for i in range(2):
             coo2[1] -= 1
             if coo[0] >= 0 and coo[1] >= 0 and coo[0] < 10 and coo[1] < 10:
                 if minas[coo2[0]][coo2[1]] == 1:
-                    contador += 1
+                    counter += 1
         coo2[0] -= 1
         if coo[0] >= 0 and coo[1] >= 0 and coo[0] < 10 and coo[1] < 10:
             if minas[coo2[0]][coo2[1]] == 1:
-                contador += 1
-        return contador
+                counter += 1
+        return counter
 
-    # Execução da primeira janela
+    # Window execution
 
     while True:
         events, values = win1.read()
 
         if events == sg.WIN_CLOSED:
             break
-        #l1_1 = [[sg.Text('Difficulty:', font=('Times New Roman', 14), text_color='black')],
-        #[sg.Combo(values=['Fácil', 'Médio', 'Difícil'], default_value='Fácil', key='difi')],
-        #[sg.Button('Iniciar Jogo')]]
-        if events == 'Iniciar':
+        if events == 'Start':
             condition1 = True
             break
 
     win1.close()
 
-    # Criação da Segunda Janela
+    # Window 2
 
     l2 = []
 
@@ -99,19 +92,18 @@ def executeGame():
 
     for i in range(10):
         for y in range(10):
-            l2[i].append(sg.Button('?', size=(5, 3), pad = (2 , 2), key = (str(i) + str(y))))
+            l2[i].append(sg.Button('?', button_color = 'yellow green', size=(6, 3), pad = (2 , 2), key = (str(i) + str(y))))
     
-    l2.append([sg.Text('', key='clock', font=('Times New Roman', 14), text_color='black')])
+    l2.append([sg.Text('', key='clock', font=('Franklin Gothic Book', 14), text_color='black')])
 
-    #l1_1 = [[sg.Text('Difficulty:', font=('Times New Roman', 14), text_color='black')],
-    #[sg.Combo(values=['Fácil', 'Médio', 'Difícil'], default_value='Fácil', key='difi')],
-    #[sg.Button('Iniciar Jogo')]]
+    l1_1 = [[sg.Text('Difficulty:', font=('Franklin Gothic Book', 14, 'bold'), text_color='gold')],
+    [sg.Combo(values=['Easy', 'Medium', 'Hard'], default_value='Easy', key='dif')],
+    [sg.Button('Start Game')]]
 
-    win1_1 = sg.Window('Campo Minado', l1_1)
+    win1_1 = sg.Window('Minesweeper', l1_1)
 
 
-    # Execução da janela da dificuldade
-    ## Se e somente se, a transição for verdadeira
+    # Difficulty things i guess
 
     if condition1:
 
@@ -121,10 +113,10 @@ def executeGame():
             if events == sg.WIN_CLOSED:
                 break
 
-            if events == 'Iniciar Jogo':
-                if values['difi'] == 'Fácil':
+            if events == 'Start Game':
+                if values['dif'] == 'Easy':
                     mines = 15
-                elif values['difi'] == 'Médio':
+                elif values['dif'] == 'Medium':
                     mines = 18
                 else:
                     mines = 21
@@ -133,7 +125,7 @@ def executeGame():
 
     if condition2:
 
-        # Randomização da posição das minas
+        # Random mines, how dangerous
 
         minas = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -156,9 +148,9 @@ def executeGame():
 
         print(minas)
 
-        win2 = sg.Window('Campo Minado', l2, finalize = True)
+        win2 = sg.Window('Minesweeper', l2, finalize = True)
 
-        # Inicialização da função do botão direito
+        # Right mouse button
 
         for i in range(100):
                 if i < 10:
@@ -168,26 +160,21 @@ def executeGame():
 
                 win2[y].bind('<Button-3>', '-right')
 
-        #Inicialização do timer
+        # Timely timers
 
         current_time = 0
         start_time = time_int()
         win1_1.close()
 
-        # Execução da segunda janela
-        ## Se e somente se, a transição for verdadeira
+        # Window 2 execution
 
         while True:
 
             events, values = win2.read(timeout=10)
 
-            #Função constante do timer
+            # Timer stuff
 
             current_time = time_int() - start_time
-            #win2['clock'].update('{:02d}:{:02d}:{:02d}:{:02d}'.format(((current_time // 100) // 60) // 60,
-            #                                            (current_time // 100) // 60 % 60,
-            #                                            (current_time // 100) % 60,
-            #                                            current_time % 100))
             win2['clock'].update('{:02d}:{:02d}:{:02d}'.format(((current_time // 100) // 60),
                                                         (current_time // 100) // 60,
                                                         (current_time // 100) % 60,
@@ -196,7 +183,7 @@ def executeGame():
             if  events == sg.WIN_CLOSED:
                 break
 
-            # Verificação minar
+            # Mine verification stuff
 
             for i in range(100):
                 if i < 10:
@@ -211,23 +198,23 @@ def executeGame():
                         stop = True
                         break
                     else:
-                        win2[y].update(str(radar()), button_color=('white','black'), disabled=True, disabled_button_color=('white', 'black'))
+                        win2[y].update(str(radar()), button_color=('white','rosy brown'), disabled=True, disabled_button_color=('dark blue', 'black'))
                         win2[y].unbind('<Button-3>')
                         holes += 1
 
-                    #Verificação de fim de jogo
+                    # Winner winner chicken dinner
 
                     if holes == 100 - mines:
                         winner = True
                         break
                 
-                #Verificação da bandeira
+                # Red flags. Lots of them
                 
                 if events == y + '-right':
                     if win2[y].ButtonText != '🚩':
-                        win2[y].update('🚩', button_color=('red', 'white'))
+                        win2[y].update('🚩', button_color=('red', 'yellow green'))
                     else:
-                        win2[y].update('?', button_color=('black','white'))
+                       win2[y].update('?', button_color=('white','yellow green'))
 
 
             if stop:
@@ -236,18 +223,18 @@ def executeGame():
             if winner:
                 break
 
-    # Popup do perdedor
+    # Big L
     if stop:
-        sg.Popup('Você perdeu!')
+        sg.Popup('You Lost!')
         win2.close()
-        executeGame()
+        Order66()
 
-    # Criação da janela do vencedor
+    # Win Window
 
-    l4 = [[sg.Text('Você ganhou! Meus parabéns')], [sg.Button('Reiniciar')]]
-    win4 = sg.Window('Campo Minado', l4)
+    l4 = [[sg.Text('You Won!')], [sg.Button('Restart')]]
+    win4 = sg.Window('Minesweeper', l4)
 
-    # Execução da janela do vencedor
+    # Win Window execution
     if winner:
         while True:
             events, values = win4.read()
@@ -255,19 +242,19 @@ def executeGame():
             if events == sg.WIN_CLOSED:
                 break
 
-            if events == 'Reiniciar':
+            if events == 'Restart':
                 restart = True
                 break
             
     
-    # Restart do game
+    # Restart? Addict.
     
     if restart:
         restart = False
         win2.close()
         win4.close()
-        executeGame()
+        Order66()
 
-# Iniciando o jogo
+# Execute order 66
 
-executeGame()
+Order66()
