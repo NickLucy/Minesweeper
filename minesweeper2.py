@@ -93,7 +93,7 @@ def Order66():
 
     for i in range(10):
         for y in range(10):
-            l2[i].append(sg.Button('?', button_color = 'yellow green', size=(5, 3), pad = (2 , 2), key = (str(i) + str(y))))
+            l2[i].append(sg.Button('?', button_color = 'yellow green', size=(6, 3), pad = (2 , 2), key = (str(i) + str(y))))
     
     l2.append([sg.Text('', key='clock', font=('Times New Roman', 14), text_color='black')])
 
@@ -218,11 +218,12 @@ def Order66():
                 #Verificação da bandeira
                 
                 if events == y + '-right':
-                    im = Image.open("flag.png")
-                    if not win2[y].ButtonText == '🚩':
-                        win2[y].update('🚩', button_color=('red', 'light green'))
+                    flag = b'iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAACXBIWXMAABJ0AAASdAHeZh94AAAD+UlEQVRo3u2YT0xcVRSHv3PfzDBNoQ2DrYIVF7JwYUzpwEChgk1bNax008a9fza6MK5MTNRNV65cmChTatsQtFpcmFZtU02ByAhMIZSoNDU2FTUiapA385g/7x4XYEJMKRgT+56Z3/a+t/jed+695zz4n0VutZg581S7QXbmpq+e2//apXIYgCLrLYyfefZQvEo+iUaMFJwds2eTu9Pic7JnauqXIAOZ9d3Z1LbqqKnbHpXY9tj9MTWvi2NufJrc8+751uYDr9zq3SAaslZE1jxUb32KIvGckSOeyuHOlj3fXoC+mMo73dnsT8E3dJPNFgfusMrd1kqtalNUOFp0uH4xlRy82JbsOQ1OYA1t9BVqVNlmlaJIzBV5wkMer0slv/8M6fN9PX4om70RGqC1qVIlDqiq5EUaXcOrxQgvf97ech6rvTU+Z1uy2VLgSm5T1lDqraVBNVKD9jhGBt2YXB/amzw60pG8L1RAa/daDKXOKrvUyg7VhirkJUVmhztaLwx3th6+2tRUFdiS2+hrVatSg1ICxxVzMKdycP7O2vkv7mo5JSX/2N4vJ78ODdDaxIA6VRKi5FV2usiLhWjkhdF9qRELaSmbDzoyGS9wJbcpayj1WHapNdvRrqhw0kTtXKYr9cbovuYHQ2HoZokCCSwJFfJCwsU875noc2NdqTFRercY970HLn3lBtrQegdJNVCvlkas1KJtjiHtsfWH8e62t7LdrS2hMLS+NSUB5GHbkugzHvJ09uHUlCPSu5zT/vaxsT8CbWi9bAXqUe4VlYTQ7AhvVlXLTPZgc0MogdaWUQKlESUG9zg29mSogf7KMuCDojofmj309/iACywhlFQKwIlFu2UgVEC6amMJIQ8qMGstfZGiObF7dHQ+NKdcGXAR3BUbeRH90Cnb3uaRiSFZ4Qz+sa2AByxh8ARFmXFE0+ppf2p8/NfQdAplIIewhMEXlgz6PpBuGx7PsEkbtx1IVy5LXDF4oCJcxmo6VrADLdnsYmi67RKQE8HF4MMiyABSTj80cjkbmnloxYbgGmEZVJQMaK+XK55+dHo6F5oBrwjkxJATQZEFlP6IaLpzdGImFD9JACzgiZAToSBYRIbApuPMD3Zk5rz/cp9G/rUNY8iLqMLPopxSK8cOTEzM3s6+7x/byK/aKAq+IBcFeou/LX7Uc+1aIQiN7KZSWD2pPCOq8KPAcZVy3yNj098FrTPfVGn9bpyyET5WX9Pxyclz+1fuxkCOGhvGScS/oVQ69NiVK3NB7843NQ+Z6uhCTwhgQjfgVYAqQBWgClAFqAJUAaoAVYAqQKFKZH1SLeaXfUpli6oWQw/kOsW3Nc+CwTgSYZhKbk/+BPabnPdmuunAAAAAAElFTkSuQmCC'
+                    if not win2[y].ButtonText == flag:
+                         win2[y].update(image_data=flag)
+
                     else:
-                        win2[y].update('?', button_color=('black', 'yellow green'))
+                        win2[y].update('?', button_color=('black','white'))
 
 
             if stop:
