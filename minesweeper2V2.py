@@ -1,26 +1,29 @@
-# Importação das bibliotecas
+# Libraries
 
 import PySimpleGUI as sg
 import random
 import time
-from PIL import Image
 
-#Time Function
+#Time function
 
 def time_int():
     return int(round(time.time() * 100))
 
 
-# Execute order 66
+# Criação da função de execução
 
-def Order66():
+def executeGame():
 
     # Criação da Primeira Janela
 
-    sg.theme('DarkGreen')
+    sg.theme('LightBlue')
     l1 = [[sg.Text('Campo Minado', font=('Times New Roman', 14, 'bold'), text_color='darkBlue')],
     [sg.Button('Iniciar')]]
     win1 = sg.Window('Campo Minado', l1)
+
+    l1_1 = [[sg.Text('Difficulty:', font=('Times New Roman', 14), text_color='black')],
+    [sg.Combo(values=['Fácil', 'Médio', 'Difícil'], default_value='Fácil', key='difi')],
+    [sg.Button('Iniciar Jogo')]]
 
     # Variável de transição
 
@@ -74,6 +77,9 @@ def Order66():
 
         if events == sg.WIN_CLOSED:
             break
+        #l1_1 = [[sg.Text('Difficulty:', font=('Times New Roman', 14), text_color='black')],
+        #[sg.Combo(values=['Fácil', 'Médio', 'Difícil'], default_value='Fácil', key='difi')],
+        #[sg.Button('Iniciar Jogo')]]
         if events == 'Iniciar':
             condition1 = True
             break
@@ -97,9 +103,9 @@ def Order66():
     
     l2.append([sg.Text('', key='clock', font=('Times New Roman', 14), text_color='black')])
 
-    l1_1 = [[sg.Text('Difficulty:', font=('Times New Roman', 14), text_color='black')],
-    [sg.Combo(values=['Easy', 'Medium', 'Hard'], default_value='Easy', key='dif')],
-    [sg.Button('Iniciar Jogo')]]
+    #l1_1 = [[sg.Text('Difficulty:', font=('Times New Roman', 14), text_color='black')],
+    #[sg.Combo(values=['Fácil', 'Médio', 'Difícil'], default_value='Fácil', key='difi')],
+    #[sg.Button('Iniciar Jogo')]]
 
     win1_1 = sg.Window('Campo Minado', l1_1)
 
@@ -116,9 +122,9 @@ def Order66():
                 break
 
             if events == 'Iniciar Jogo':
-                if values['dif'] == 'Fácil':
+                if values['difi'] == 'Fácil':
                     mines = 15
-                elif values['dif'] == 'Médio':
+                elif values['difi'] == 'Médio':
                     mines = 18
                 else:
                     mines = 21
@@ -205,7 +211,7 @@ def Order66():
                         stop = True
                         break
                     else:
-                        win2[y].update(str(radar()), button_color=('white','rosy brown'), disabled=True, disabled_button_color=('dark blue', 'black'))
+                        win2[y].update(str(radar()), button_color=('white','black'), disabled=True, disabled_button_color=('white', 'black'))
                         win2[y].unbind('<Button-3>')
                         holes += 1
 
@@ -218,9 +224,8 @@ def Order66():
                 #Verificação da bandeira
                 
                 if events == y + '-right':
-                    im = Image.open("flag.png")
                     if not win2[y].ButtonText == '🚩':
-                        win2[y].update('🚩', button_color=('red', 'light green'))
+                        win2[y].update('🚩', button_color=('red', 'white'))
                     else:
                         win2[y].update('?', button_color=('black','white'))
 
@@ -235,7 +240,7 @@ def Order66():
     if stop:
         sg.Popup('Você perdeu!')
         win2.close()
-        Order66()
+        executeGame()
 
     # Criação da janela do vencedor
 
@@ -261,8 +266,8 @@ def Order66():
         restart = False
         win2.close()
         win4.close()
-        Order66()
+        executeGame()
 
 # Iniciando o jogo
 
-Order66()
+executeGame()

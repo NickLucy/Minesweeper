@@ -217,10 +217,12 @@ def Order66():
                 
                 #Verificação da bandeira
                 
+                
                 if events == y + '-right':
-                    im = Image.open("flag.png")
-                    if not win2[y].ButtonText == '🚩':
-                        win2[y].update('🚩', button_color=('red', 'light green'))
+                    #im = Image.open("flag.png")
+                    if not win2[y].ButtonText == sg.Image('flag.png', size=(300,300)):
+                        
+                        win2[y].update(sg.Image('flag.png', size=(10,10)), button_color=('red', 'light green'))
                     else:
                         win2[y].update('?', button_color=('black','white'))
 
